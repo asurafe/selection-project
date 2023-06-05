@@ -7,13 +7,12 @@
       :total="1000"
     />
   </el-config-provider>
-
 </template>
 <script setup lang="ts">
-import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import zhCn from "element-plus/lib/locale/lang/zh-cn";
 
 const handle = () => {
-  ElMessage.warning('你好👋')
-}
+  ElMessage.warning("你好👋");
+};
 </script>
 <style scoped></style>
