@@ -5,6 +5,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+
 // vite.config.ts
 import {
   createStyleImportPlugin,
@@ -44,6 +45,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve("./src"), // 相对路径别名配置，使用 @ 代替 src
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        javascriptEnabled: true,
+        additionalData: '@import "./src/style/variable.scss";',
+      },
     },
   },
 });
