@@ -1,11 +1,6 @@
 <template>
   <el-config-provider :locale="zhCn">
     <el-button type="primary" @click="handle">你好</el-button>
-    <el-pagination
-      :page-size="100"
-      layout="total, prev, pager, next"
-      :total="1000"
-    />
   </el-config-provider>
 </template>
 <script setup lang="ts">

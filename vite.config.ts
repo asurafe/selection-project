@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 // vite.config.ts
 import {
   createStyleImportPlugin,
@@ -32,6 +33,12 @@ export default defineConfig({
           },
         },
       ],
+    }),
+    createSvgIconsPlugin({
+      // Specify the icon folder to be cached
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      // Specify symbolId format
+      symbolId: 'icon-[dir]-[name]',
     }),
   ],
   resolve: {
