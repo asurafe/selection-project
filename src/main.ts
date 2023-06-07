@@ -7,5 +7,5 @@ import "@/style/index.scss";
 
 const app = createApp(App);
 app.use(globalComponent);
-app.use(router)
+app.use(router);
 app.mount("#app");
