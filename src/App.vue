@@ -5,21 +5,21 @@
 </template>
 <script setup lang="ts">
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import axios from "axios";
+import request from "@/utils/request";
 const handle = async () => {
-  const res: any = await axios({
-    url: "/api/user/login",
+  const res: any = await request({
+    url: "/user/login",
     method: "post",
     data: {
       username: "admin",
       password: "111111",
     },
   });
-  if (res.data.code !== 200) {
-    ElMessage.error(res.data.data.message);
+  if(res.code == 200){
+    ElMessage.success('成功')
     return;
   }
-  ElMessage.success("成功");
+  ElMessage.error(res.data.message)
 };
 </script>
 <style scoped lang="scss">
