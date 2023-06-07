@@ -15,11 +15,11 @@ const handle = async () => {
       password: "111111",
     },
   });
-  if(res.code == 200){
-    ElMessage.success('成功')
+  if (res.code == 200) {
+    ElMessage.success("成功");
     return;
   }
-  ElMessage.error(res.data.message)
+  ElMessage.error(res.data.message);
 };
 </script>
 <style scoped lang="scss">
