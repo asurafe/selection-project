@@ -9,5 +9,5 @@ import "@/style/index.scss";
 const app = createApp(App);
 app.use(globalComponent);
 app.use(router);
-app.use(pinia)
+app.use(pinia);
 app.mount("#app");
