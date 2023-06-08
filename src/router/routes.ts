@@ -1,9 +1,26 @@
 import { RouteRecordRaw } from "vue-router";
 export const constantRoutes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    component: () => import("@/views/home/index.vue"),
-    name: "home",
+    path: '/',
+    component: () => import('@/views/layout/index.vue'),
+    name: 'layout',
+    meta: {
+      title: '',
+      hidden: false,
+      icon: '',
+    },
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: () => import('@/views/home/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
   },
   {
     path: "/login",

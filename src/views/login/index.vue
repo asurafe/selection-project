@@ -24,10 +24,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive,onMounted } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { userStore } from "@/store/modules/user";
+import { getTime } from '@/utils/time'
+onMounted(()=>{
+})
 
 const store = userStore();
 const $router = useRouter();
@@ -45,7 +48,7 @@ const login = async () => {
     await store.userLogin(loginForm);
     $router.push("/");
     ElNotification({
-      title: "Success",
+      title: `Hi! ${getTime()}`,
       message: "登陆成功",
       type: "success",
     });
