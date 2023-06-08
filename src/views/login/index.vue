@@ -24,13 +24,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive,onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { userStore } from "@/store/modules/user";
-import { getTime } from '@/utils/time'
-onMounted(()=>{
-})
+import { getTime } from "@/utils/time";
+onMounted(() => {});
 
 const store = userStore();
 const $router = useRouter();

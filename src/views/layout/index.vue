@@ -1,8 +1,6 @@
 <template>
   <el-container class="layout-container-demo" style="height: 100vh">
-    <el-aside
-      width="200px"
-    >
+    <el-aside width="200px">
       <el-scrollbar>
         <el-menu
           active-text-color="#fff"
@@ -15,18 +13,14 @@
     </el-aside>
 
     <el-container class="container">
-      <el-main
-      >
-        <el-scrollbar>
-        </el-scrollbar>
+      <el-main>
+        <el-scrollbar> </el-scrollbar>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 .layout-container-demo {
