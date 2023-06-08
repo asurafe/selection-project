@@ -4,7 +4,7 @@
       <div class="login-title">👋 Hello</div>
       <el-form class="form-box" label-width="80px" :model="loginForm">
         <el-form-item label="账号">
-          <el-input :prefix-icon="User" v-model="loginForm.name" />
+          <el-input :prefix-icon="User" v-model="loginForm.username" />
         </el-form-item>
         <el-form-item label="密码">
           <el-input
@@ -15,37 +15,49 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button class="login-button" @click="handle">登陆</el-button>
+          <el-button class="login-button" :loading="loading" @click="login"
+            >登陆</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
-import { reqLogin } from "@/api/user";
-import type { loginResData } from "@/api/user/type";
 import { useRouter } from "vue-router";
+import { userStore } from "@/store/modules/user";
 
+const store = userStore();
 const $router = useRouter();
 
+const loading = ref(false);
+
 const loginForm = reactive({
-  name: "admin",
+  username: "admin",
   password: "111111",
 });
 
-const handle = async () => {
-  const res: loginResData = await reqLogin({
-    username: loginForm.name,
-    password: loginForm.password,
-  });
-  if (res.code == 200) {
-    ElMessage.success("登陆成功");
+const login = async () => {
+  loading.value = true;
+  try {
+    await store.userLogin(loginForm);
     $router.push("/");
-    return;
+    ElNotification({
+      title: "Success",
+      message: "登陆成功",
+      type: "success",
+    });
+  } catch (errorMsg) {
+    ElNotification({
+      title: "Error",
+      message: errorMsg,
+      type: "error",
+    });
+  } finally {
+    loading.value = false;
   }
-  ElMessage.error(res.data.message);
 };
 </script>
 <style scoped lang="scss">
