@@ -1,5 +1,5 @@
 export default {
-    title: 'HuaWei',
-    logo: '/logo.png',
-    logoHidden: true,
-}
+  title: "HuaWei",
+  logo: "/logo.png",
+  logoHidden: true,
+};

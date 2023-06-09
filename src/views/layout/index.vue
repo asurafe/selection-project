@@ -8,8 +8,7 @@
           text-color="#959ea6"
           :router="true"
         >
-         <Logo />
-
+          <Logo />
         </el-menu>
       </el-scrollbar>
     </el-aside>
@@ -17,15 +16,15 @@
     <el-container class="container">
       <el-main>
         <el-scrollbar>
-            <el-header>Header</el-header>
-         </el-scrollbar>
+          <el-header>Header</el-header>
+        </el-scrollbar>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script setup lang="ts">
-import Logo from './logo/index.vue'
+import Logo from "./logo/index.vue";
 </script>
 
 <style lang="scss" scoped>
