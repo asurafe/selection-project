@@ -9,6 +9,7 @@
           :router="true"
         >
           <Logo />
+          <Menu :menuList="userStore.menuRoutes"/>
         </el-menu>
       </el-scrollbar>
     </el-aside>
@@ -25,6 +26,11 @@
 
 <script setup lang="ts">
 import Logo from "./logo/index.vue";
+import Menu from "./menu/index.vue";
+import { userStore as useUserStore } from "@/store/modules/user";
+
+const userStore = useUserStore();
+
 </script>
 
 <style lang="scss" scoped>
