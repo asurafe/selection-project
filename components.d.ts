@@ -23,7 +23,7 @@ declare module '@vue/runtime-core' {
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElPagination: typeof import("element-plus/es")["ElPagination"]
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElSubItemMenu: typeof import('element-plus/es')['ElSubItemMenu']
+    ElSubItemMenu: typeof import("element-plus/es")["ElSubItemMenu"]
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

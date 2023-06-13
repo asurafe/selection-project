@@ -16,7 +16,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: "首页",
           hidden: false,
-          icon:'HomeFilled'
+          icon: "HomeFilled",
         },
       },
     ],
