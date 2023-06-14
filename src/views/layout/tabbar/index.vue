@@ -53,5 +53,4 @@ img {
   height: 24px;
   margin: 0 10px;
 }
-
 </style>

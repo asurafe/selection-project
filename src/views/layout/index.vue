@@ -30,11 +30,11 @@
 import Logo from "./logo/index.vue";
 import Menu from "./menu/index.vue";
 import Main from "./main/index.vue";
-import Tabbar from "./tabbar/index.vue"
+import Tabbar from "./tabbar/index.vue";
 import { useRoute } from "vue-router";
 import { userStore as useUserStore } from "@/store/modules/user";
 
-const $route = useRoute()
+const $route = useRoute();
 const userStore = useUserStore();
 </script>
 
