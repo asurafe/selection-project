@@ -15,9 +15,10 @@
     </el-aside>
 
     <el-container class="container">
+      <el-header style="width: 100%"> Header</el-header>
       <el-main>
         <el-scrollbar>
-          <el-header>Header</el-header>
+          <Main />
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -27,6 +28,7 @@
 <script setup lang="ts">
 import Logo from "./logo/index.vue";
 import Menu from "./menu/index.vue";
+import Main from "./main/index.vue"
 import { userStore as useUserStore } from "@/store/modules/user";
 
 const userStore = useUserStore();
