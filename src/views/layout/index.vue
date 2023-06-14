@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import Logo from "./logo/index.vue";
 import Menu from "./menu/index.vue";
-import Main from "./main/index.vue"
+import Main from "./main/index.vue";
 import { userStore as useUserStore } from "@/store/modules/user";
 
 const userStore = useUserStore();
