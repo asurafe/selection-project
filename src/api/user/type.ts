@@ -25,7 +25,11 @@ interface userType {
   token: string;
 }
 
+interface Data {
+  checkUser: userType;
+}
+
 export interface userResData {
   code: number;
-  data: userType;
+  data: Data;
 }

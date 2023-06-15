@@ -2,6 +2,14 @@
   <div>home👋</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { userStore } from "@/store/modules/user";
 
-<style scoped></style>
+const useUserStore = userStore();
+onMounted(() => {
+  useUserStore.userInfor();
+});
+</script>
+
+<style scoped lang="scss"></style>

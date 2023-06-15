@@ -2,7 +2,7 @@
   <el-button circle icon="Refresh" @click="handleRefresh"></el-button>
   <el-button circle icon="FullScreen" @click="handleFullScreen"></el-button>
   <el-button circle icon="Setting"></el-button>
-  <img src="../../../../../public/logo.png" alt="" />
+  <img :src="useUserStore.avatar" alt="" />
   <el-dropdown>
     <span class="el-dropdown-link" style="cursor: pointer">
       <el-icon class="el-icon--right">
@@ -18,7 +18,11 @@
 </template>
 
 <script setup lang="ts">
+import { userStore } from "@/store/modules/user";
 import useLayOutSettingStore from "@/store/setting";
+
+const useUserStore = userStore()
+console.log(useUserStore)
 const layOutSettingStore = useLayOutSettingStore();
 const handleRefresh = () => {
   layOutSettingStore.refresh = !layOutSettingStore.refresh;
@@ -35,8 +39,9 @@ const handleFullScreen = () => {
 
 <style lang="scss" scoped>
 img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   margin: 0 10px;
+  border-radius: 50%;
 }
 </style>
