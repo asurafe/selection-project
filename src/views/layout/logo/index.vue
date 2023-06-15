@@ -11,7 +11,7 @@ import setting from "@/setting";
 
 <style lang="scss" scoped>
 .logo {
-  width: 95%;
+  width: 90%;
   display: flex;
   align-items: center;
   height: $base-menu-logo-height;
@@ -30,7 +30,7 @@ import setting from "@/setting";
   .title {
     display: inline-block;
     height: 32px;
-    margin: 2px 0 0 6px;
+    margin: 2px 0 0 9px;
     overflow: hidden;
     font-size: 18px;
     font-weight: 600;

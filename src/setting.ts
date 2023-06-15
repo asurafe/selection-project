@@ -1,5 +1,5 @@
 export default {
-  title: "HuaWei",
+  title: "Vue-Admin",
   logo: "/logo.png",
   logoHidden: true,
 };

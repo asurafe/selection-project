@@ -1,11 +1,12 @@
 <template>
-  <el-container class="layout-container-demo" style="height: 100vh">
-    <el-aside width="200px">
+  <el-container class="layout-container-demo">
+    <el-aside width="200px" :class="{ isCollapse: layOutSettingStore.fold }">
       <el-scrollbar>
         <el-menu
           active-text-color="#fff"
           background-color="#001529"
           text-color="#959ea6"
+          :collapse="layOutSettingStore.fold"
           :default-active="$route.path"
           :router="true"
         >
@@ -17,7 +18,7 @@
 
     <el-container class="container">
       <Tabbar />
-      <el-main>
+      <el-main :class="{ isCollapse: layOutSettingStore.fold }">
         <el-scrollbar>
           <Main />
         </el-scrollbar>
@@ -33,14 +34,16 @@ import Main from "./main/index.vue";
 import Tabbar from "./tabbar/index.vue";
 import { useRoute } from "vue-router";
 import { userStore as useUserStore } from "@/store/modules/user";
+import useLayOutSettingStore from "@/store/setting";
 
 const $route = useRoute();
 const userStore = useUserStore();
+const layOutSettingStore = useLayOutSettingStore();
 </script>
 
 <style lang="scss" scoped>
 .layout-container-demo {
-  height: 100%;
+  height: 100vh;
 }
 .layout-container-demo .el-menu {
   border-right: none;
@@ -48,11 +51,15 @@ const userStore = useUserStore();
 .layout-container-demo .el-main {
   position: absolute;
   padding: 20px;
-  left: 200px;
+  left: $base-menu-width;
   top: 60px;
   transition: all 0.3s;
   width: calc(100% - $base-menu-width);
   height: calc(100vh - 60px);
+  &.isCollapse {
+    left: 56px;
+    width: calc(100% - 56px);
+  }
 }
 
 .el-aside {
@@ -65,6 +72,6 @@ const userStore = useUserStore();
   z-index: 999;
 }
 .isCollapse {
-  width: 56px;
+  width: $base-fold-menu-width;
 }
 </style>
