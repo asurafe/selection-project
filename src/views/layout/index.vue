@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container-demo">
-    <el-aside width="200px" :class="{ isCollapse: layOutSettingStore.fold }">
+    <el-aside :class="{ isCollapse: layOutSettingStore.fold }">
       <el-scrollbar>
         <el-menu
           active-text-color="#fff"
@@ -44,34 +44,34 @@ const layOutSettingStore = useLayOutSettingStore();
 <style lang="scss" scoped>
 .layout-container-demo {
   height: 100vh;
-}
-.layout-container-demo .el-menu {
-  border-right: none;
-}
-.layout-container-demo .el-main {
-  position: absolute;
-  padding: 20px;
-  left: $base-menu-width;
-  top: 60px;
-  transition: all 0.3s;
-  width: calc(100% - $base-menu-width);
-  height: calc(100vh - 60px);
-  &.isCollapse {
-    left: 56px;
-    width: calc(100% - 56px);
+  .el-aside {
+    width: 200px;
+    background-color: #001529 !important;
+    transition: all 0.3s;
+    &.isCollapse {
+      width: $base-fold-menu-width;
+    }
   }
-}
-
-.el-aside {
-  background-color: #001529 !important;
-  transition: all 0.3s;
-}
-.el-header {
-  background-color: #fff !important;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  z-index: 999;
-}
-.isCollapse {
-  width: $base-fold-menu-width;
+  .el-menu {
+    border-right: none;
+  }
+  .el-main {
+    position: absolute;
+    padding: 20px;
+    left: $base-menu-width;
+    top: 60px;
+    transition: all 0.3s;
+    width: calc(100% - $base-menu-width);
+    height: calc(100vh - 60px);
+    &.isCollapse {
+      left: $base-fold-menu-width;
+      width: calc(100% - $base-fold-menu-width);
+    }
+  }
+  .el-header {
+    background-color: #fff !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    z-index: 999;
+  }
 }
 </style>

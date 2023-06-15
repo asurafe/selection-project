@@ -5,7 +5,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     component: () => import("@/views/layout/index.vue"),
     name: "layout",
     meta: {
-      title: "layout",
+      title: "",
       hidden: false,
     },
     redirect: "/home",

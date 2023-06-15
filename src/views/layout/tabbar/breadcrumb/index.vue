@@ -3,16 +3,25 @@
     <component :is="layOutSettingStore.fold ? 'Expand' : 'Fold'"></component>
   </el-icon>
   <el-breadcrumb separator-icon="ArrowRight" class="bread-crumb">
-    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item
+      v-for="(item, index) in $route.matched"
+      :key="index"
+      v-show="item.meta.title"
+      >
+      <el-icon class="breadcrumb-icon">
+        <component :is="item.meta.icon" />
+      </el-icon>
+      {{ item.meta.title }}</el-breadcrumb-item
+    >
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/setting";
+import { useRoute } from "vue-router";
 
 const layOutSettingStore = useLayOutSettingStore();
-
+const $route = useRoute();
 const changeIcon = () => {
   layOutSettingStore.fold = !layOutSettingStore.fold;
 };
@@ -21,5 +30,8 @@ const changeIcon = () => {
 <style scoped lang="scss">
 .bread-crumb {
   margin-left: 20px;
+}
+.breadcrumb-icon {
+  transform: translateY(1.5px);
 }
 </style>

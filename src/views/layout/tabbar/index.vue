@@ -20,7 +20,6 @@ import Setting from "./setting/index.vue";
   justify-content: space-between;
   width: 100%;
   &-left {
-    margin-left: 20px;
     display: flex;
     align-items: center;
   }
