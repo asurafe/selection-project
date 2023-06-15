@@ -25,12 +25,12 @@ const handleRefresh = () => {
 };
 const handleFullScreen = () => {
   const full = document.fullscreenElement;
-  if(!full){
-    document.documentElement.requestFullscreen()
-  }else {
-    document.exitFullscreen()
+  if (!full) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
