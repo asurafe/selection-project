@@ -7,7 +7,7 @@
       v-for="(item, index) in $route.matched"
       :key="index"
       v-show="item.meta.title"
-      >
+    >
       <el-icon class="breadcrumb-icon">
         <component :is="item.meta.icon" />
       </el-icon>
