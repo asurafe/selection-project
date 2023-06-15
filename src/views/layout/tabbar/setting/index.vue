@@ -1,6 +1,6 @@
 <template>
   <el-button circle icon="Refresh" @click="handleRefresh"></el-button>
-  <el-button circle icon="FullScreen"></el-button>
+  <el-button circle icon="FullScreen" @click="handleFullScreen"></el-button>
   <el-button circle icon="Setting"></el-button>
   <img src="../../../../../public/logo.png" alt="" />
   <el-dropdown>
@@ -23,6 +23,14 @@ const layOutSettingStore = useLayOutSettingStore();
 const handleRefresh = () => {
   layOutSettingStore.refresh = !layOutSettingStore.refresh;
 };
+const handleFullScreen = () => {
+  const full = document.fullscreenElement;
+  if(!full){
+    document.documentElement.requestFullscreen()
+  }else {
+    document.exitFullscreen()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
