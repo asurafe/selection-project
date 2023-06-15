@@ -11,7 +11,7 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="handleLayout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -20,13 +20,16 @@
 <script setup lang="ts">
 import { userStore } from "@/store/modules/user";
 import useLayOutSettingStore from "@/store/setting";
+import { useRouter } from "vue-router";
 
+const $router = useRouter()
 const useUserStore = userStore();
 console.log(useUserStore);
 const layOutSettingStore = useLayOutSettingStore();
 const handleRefresh = () => {
   layOutSettingStore.refresh = !layOutSettingStore.refresh;
 };
+
 const handleFullScreen = () => {
   const full = document.fullscreenElement;
   if (!full) {
@@ -35,6 +38,11 @@ const handleFullScreen = () => {
     document.exitFullscreen();
   }
 };
+
+const handleLayout = () => {
+  useUserStore.userLayout();
+  $router.push('/login')
+}
 </script>
 
 <style lang="scss" scoped>
