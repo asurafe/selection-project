@@ -7,5 +7,5 @@ export const GET_TOKEN = () => {
 };
 
 export const REMOVE_TOKEN = () => {
-  return localStorage.removeItem("TOKEN")
-}
+  return localStorage.removeItem("TOKEN");
+};

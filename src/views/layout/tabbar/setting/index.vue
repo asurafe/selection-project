@@ -22,7 +22,7 @@ import { userStore } from "@/store/modules/user";
 import useLayOutSettingStore from "@/store/setting";
 import { useRouter } from "vue-router";
 
-const $router = useRouter()
+const $router = useRouter();
 const useUserStore = userStore();
 console.log(useUserStore);
 const layOutSettingStore = useLayOutSettingStore();
@@ -41,8 +41,8 @@ const handleFullScreen = () => {
 
 const handleLayout = () => {
   useUserStore.userLayout();
-  $router.push('/login')
-}
+  $router.push("/login");
+};
 </script>
 
 <style lang="scss" scoped>
