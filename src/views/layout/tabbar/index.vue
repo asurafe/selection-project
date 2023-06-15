@@ -1,17 +1,17 @@
 <template>
   <el-header class="tabbar">
     <div class="tabbar-left">
-        <BreadCrumb />
+      <BreadCrumb />
     </div>
     <div class="tabbar-right">
-        <Setting />
+      <Setting />
     </div>
   </el-header>
 </template>
 
 <script setup lang="ts">
-import BreadCrumb from './breadcrumb/index.vue'
-import Setting from './setting/index.vue'
+import BreadCrumb from "./breadcrumb/index.vue";
+import Setting from "./setting/index.vue";
 </script>
 
 <style scoped lang="scss">
@@ -23,12 +23,10 @@ import Setting from './setting/index.vue'
     margin-left: 20px;
     display: flex;
     align-items: center;
-
   }
   &-right {
     display: flex;
     align-items: center;
   }
 }
-
 </style>
