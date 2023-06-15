@@ -21,8 +21,8 @@
 import { userStore } from "@/store/modules/user";
 import useLayOutSettingStore from "@/store/setting";
 
-const useUserStore = userStore()
-console.log(useUserStore)
+const useUserStore = userStore();
+console.log(useUserStore);
 const layOutSettingStore = useLayOutSettingStore();
 const handleRefresh = () => {
   layOutSettingStore.refresh = !layOutSettingStore.refresh;

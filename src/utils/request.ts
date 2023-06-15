@@ -1,16 +1,15 @@
 import axios from "axios";
 import { userStore } from "@/store/modules/user";
 
-
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
 });
 
 request.interceptors.request.use((config) => {
-  const useUserStore = userStore()
-  if(useUserStore.token){
-    config.headers.token = useUserStore.token
+  const useUserStore = userStore();
+  if (useUserStore.token) {
+    config.headers.token = useUserStore.token;
   }
   return config;
 });
