@@ -18,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import useLayOutSettingStore from '@/store/setting';
-const layOutSettingStore = useLayOutSettingStore()
+import useLayOutSettingStore from "@/store/setting";
+const layOutSettingStore = useLayOutSettingStore();
 const handleRefresh = () => {
-  layOutSettingStore.refresh = !layOutSettingStore.refresh
-}
+  layOutSettingStore.refresh = !layOutSettingStore.refresh;
+};
 </script>
 
 <style lang="scss" scoped>
