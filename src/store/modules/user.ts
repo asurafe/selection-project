@@ -4,7 +4,7 @@ import type {
   LoginFormData,
   LoginResponseData,
   userInfoResponseData,
-  userLogoutData
+  userLogoutData,
 } from "@/api/user/type";
 import type { UserState } from "./type";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
@@ -52,7 +52,7 @@ export const userStore = defineStore("user", {
         this.avatar = "";
         this.username = "";
         REMOVE_TOKEN();
-        return 'ok'
+        return "ok";
       } else {
         return Promise.reject(new Error(res.message));
       }

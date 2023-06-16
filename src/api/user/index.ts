@@ -3,7 +3,7 @@ import type {
   LoginFormData,
   LoginResponseData,
   userInfoResponseData,
-  userLogoutData
+  userLogoutData,
 } from "./type";
 enum API {
   LOGIN_URL = "/admin/acl/index/login",
