@@ -38,7 +38,7 @@ const loading = ref(false);
 
 const loginForm = reactive({
   username: "admin",
-  password: "111111",
+  password: "atguigu123",
 });
 
 const login = async () => {
@@ -89,8 +89,12 @@ const login = async () => {
     }
     .form-box {
       width: 80%;
+      .el-input {
+        height: 40px;
+      }
       .login-button {
         margin-top: 24px;
+        height: 40px;
         width: 100%;
         height: 36px;
       }

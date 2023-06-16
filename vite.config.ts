@@ -1,6 +1,6 @@
 import vue from "@vitejs/plugin-vue";
 import path from "path";
-import { defineConfig, UserConfigExport, ConfigEnv } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
@@ -12,7 +12,8 @@ import {
   createStyleImportPlugin,
   ElementPlusResolve,
 } from "vite-plugin-style-import";
-export default ({ command }) => {
+export default ({ command, mode }) => {
+  const env = loadEnv(mode, process.cwd());
   return {
     plugins: [
       vue(),
@@ -55,6 +56,15 @@ export default ({ command }) => {
         scss: {
           javascriptEnabled: true,
           additionalData: '@import "./src/style/variable.scss";',
+        },
+      },
+    },
+    server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_SERVE,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },

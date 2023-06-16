@@ -40,9 +40,13 @@ const handleFullScreen = () => {
   }
 };
 // 退出登陆
-const handleLayout = () => {
-  useUserStore.userLayout();
-  $router.push("/login");
+const handleLayout = async () => {
+  try {
+    await useUserStore.userLayout();
+    $router.push("/login");
+  } catch (e) {
+    ElMessage.error(e);
+  }
 };
 </script>
 
