@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="login-box">
-      <div class="login-title">👋 Hello</div>
-      <el-form class="form-box" label-width="80px" :model="loginForm">
-        <el-form-item label="账号">
+      <div class="login-title">Vue-Admin</div>
+      <el-form class="form-box" :model="loginForm">
+        <el-form-item>
           <el-input :prefix-icon="User" v-model="loginForm.username" />
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item>
           <el-input
             :prefix-icon="Lock"
             type="password"
@@ -75,24 +75,22 @@ const login = async () => {
     width: 650px;
     height: 40vh;
     border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: rgba(255, 255, 255, 0.7);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    position: relative;
     .login-title {
       font-size: 36px;
-      position: absolute;
-      top: 36px;
-      left: 36px;
+      font-weight: 700;
+      margin-bottom: 50px;
     }
     .form-box {
-      position: absolute;
-      top: 60%;
-      left: 60%;
-      transform: translate(-60%, -60%);
       width: 80%;
       .login-button {
-        margin-top: 36px;
+        margin-top: 24px;
         width: 100%;
         height: 36px;
       }

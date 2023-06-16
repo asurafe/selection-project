@@ -11,6 +11,7 @@ export const userStore = defineStore("user", {
       token: GET_TOKEN(),
       menuRoutes: constantRoutes,
       avatar: "",
+      username:""
     };
   },
   actions: {
@@ -33,7 +34,10 @@ export const userStore = defineStore("user", {
       const res: userResData = await reqUserInfo();
       if (res.code == 200) {
         this.avatar = res.data.checkUser.avatar;
+        this.username = res.data.checkUser.username;
+        return 'ok'
       } else {
+        return Promise.reject('获取用户信息失败')
       }
     },
     userLayout() {
