@@ -22,6 +22,7 @@ import { useRoute } from "vue-router";
 
 const layOutSettingStore = useLayOutSettingStore();
 const $route = useRoute();
+// 收起左侧菜单
 const changeIcon = () => {
   layOutSettingStore.fold = !layOutSettingStore.fold;
 };

@@ -24,12 +24,13 @@ import { useRouter } from "vue-router";
 
 const $router = useRouter();
 const useUserStore = userStore();
-console.log(useUserStore);
+
 const layOutSettingStore = useLayOutSettingStore();
+// 刷新
 const handleRefresh = () => {
   layOutSettingStore.refresh = !layOutSettingStore.refresh;
 };
-
+// 全屏
 const handleFullScreen = () => {
   const full = document.fullscreenElement;
   if (!full) {
@@ -38,7 +39,7 @@ const handleFullScreen = () => {
     document.exitFullscreen();
   }
 };
-
+// 退出登陆
 const handleLayout = () => {
   useUserStore.userLayout();
   $router.push("/login");
