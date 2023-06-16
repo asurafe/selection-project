@@ -5,7 +5,7 @@ import router from "./router";
 import pinia from "./store";
 import globalComponent from "@/components/index";
 import "@/style/index.scss";
-import "@/permisstion.ts"
+import "@/permisstion.ts";
 
 const app = createApp(App);
 app.use(globalComponent);
