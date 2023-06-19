@@ -9,6 +9,8 @@ const useUserStore = userStore(pinia);
 nprogress.configure({ showSpinner: false });
 
 router.beforeEach(async (to, from, next) => {
+  document.title = to.meta.title;
+
   const { token, username } = useUserStore;
 
   if (token) {
