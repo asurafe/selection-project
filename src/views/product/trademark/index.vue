@@ -1,6 +1,8 @@
 <template>
   <el-card class="box-card">
-    <el-button type="primary" icon="Plus" @click="addTradeMark">添加品牌</el-button>
+    <el-button type="primary" icon="Plus" @click="addTradeMark"
+      >添加品牌</el-button
+    >
     <el-table :data="trademarkArr" class="box-table">
       <el-table-column label="序号" width="180" prop="id" />
       <el-table-column label="品牌名称" prop="tmName" />
@@ -49,7 +51,6 @@ const pageSize = ref<number>(5);
 const trademarkTotal = ref<number>(0);
 const trademarkArr = ref<Records>([]);
 
-
 const getHasTrademark = async (pager = 1) => {
   pageNo.value = pager;
   const res: TradeMarkResponseData = await reqHasTrademark(
@@ -57,17 +58,16 @@ const getHasTrademark = async (pager = 1) => {
     pageSize.value
   );
   if (res.code == 200) {
-    const { records,total } = res.data;
+    const { records, total } = res.data;
     trademarkTotal.value = total;
     trademarkArr.value = records;
   }
 };
 const onPageSizeChange = () => {
-  getHasTrademark()
-}
+  getHasTrademark();
+};
 
-const addTradeMark = () => {
-}
+const addTradeMark = () => {};
 
 const updateTradeMark = (row: any) => {
   console.log(row);
@@ -76,7 +76,6 @@ const updateTradeMark = (row: any) => {
 const removeTradeMark = (row: any) => {
   console.log(row);
 };
-
 
 onMounted(() => {
   getHasTrademark();
