@@ -10,7 +10,7 @@
         <el-table-column label="LOGO" prop="logoUrl">
           <template #="{ row }">
             <el-image
-              style="width: 100px; height: 100px;"
+              style="width: 100px; height: 100px"
               :src="row.logoUrl"
               :zoom-rate="1"
               :initial-index="1.2"
