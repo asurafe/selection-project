@@ -1,5 +1,9 @@
 <template>
-  <el-dialog v-model="dialogVisible" :title="trademarkParams.id ? '修改品牌' : '添加品牌'" width="40%">
+  <el-dialog
+    v-model="dialogVisible"
+    :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
+    width="40%"
+  >
     <el-form
       ref="formRef"
       label-position="left"
@@ -55,8 +59,8 @@ const props = defineProps({
   },
   pageNo: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 const dialogVisible = ref(false);
