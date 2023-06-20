@@ -1,58 +1,61 @@
 <template>
-  <el-card class="box-card">
-    <el-button type="primary" icon="Plus" @click="addTradeMark"
-      >添加品牌</el-button
-    >
-    <el-table :data="trademarkArr" class="box-table">
-      <el-table-column label="序号" width="180" prop="id" />
-      <el-table-column label="品牌名称" prop="tmName" />
-      <el-table-column label="LOGO" prop="logoUrl">
-        <template #="{ row }">
-          <el-image
-            style="width: 100px; height: 100px"
-            :src="row.logoUrl"
-            :zoom-rate="1"
-            :initial-index="1.2"
-            preview-teleported
-            :preview-src-list="[row.logoUrl]"
-            fit="fill"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template #="{ row }">
-          <el-button
-            type="primary"
-            size="small"
-            icon="Edit"
-            @click="updateTradeMark(row)"
-          ></el-button>
-          <el-button
-            type="primary"
-            size="small"
-            icon="Delete"
-            @click="removeTradeMark(row.id)"
-          ></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      v-model:current-page="pageNo"
-      v-model:page-size="pageSize"
-      :page-sizes="[5, 10, 15, 20]"
-      background
-      layout="prev, pager, next, jumper, ->, sizes, total "
-      :total="trademarkTotal"
-      @size-change="onPageSizeChange"
-      @current-change="getHasTrademark"
+  <div>
+    <el-card class="box-card">
+      <el-button type="primary" icon="Plus" @click="addTradeMark"
+        >添加品牌</el-button
+      >
+      <el-table :data="trademarkArr" class="box-table">
+        <el-table-column label="序号" width="180" prop="id" />
+        <el-table-column label="品牌名称" prop="tmName" />
+        <el-table-column label="LOGO" prop="logoUrl">
+          <template #="{ row }">
+            <el-image
+              style="width: 100px; height: 100px;"
+              :src="row.logoUrl"
+              :zoom-rate="1"
+              :initial-index="1.2"
+              preview-teleported
+              hide-on-click-modal
+              :preview-src-list="[row.logoUrl]"
+              fit="fill"
+            />
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template #="{ row }">
+            <el-button
+              type="primary"
+              size="small"
+              icon="Edit"
+              @click="updateTradeMark(row)"
+            ></el-button>
+            <el-button
+              type="primary"
+              size="small"
+              icon="Delete"
+              @click="removeTradeMark(row.id)"
+            ></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        v-model:current-page="pageNo"
+        v-model:page-size="pageSize"
+        :page-sizes="[5, 10, 15, 20]"
+        background
+        layout="prev, pager, next, jumper, ->, sizes, total "
+        :total="trademarkTotal"
+        @size-change="onPageSizeChange"
+        @current-change="getHasTrademark"
+      />
+    </el-card>
+    <TradeDialog
+      ref="trademark"
+      @update="getHasTrademark"
+      :trademarkData="trademarkParams"
+      :pageNo="pageNo"
     />
-  </el-card>
-  <TradeDialog
-    ref="trademark"
-    @update="getHasTrademark"
-    :trademarkData="trademarkParams"
-    :pageNo="pageNo"
-  />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -132,10 +135,6 @@ onMounted(() => {
 .box-card {
   .box-table {
     margin: 24px 0;
-    img {
-      width: 100px;
-      height: 100px;
-    }
   }
 }
 </style>
