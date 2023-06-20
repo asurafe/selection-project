@@ -8,7 +8,15 @@
       <el-table-column label="品牌名称" prop="tmName" />
       <el-table-column label="LOGO" prop="logoUrl">
         <template #="{ row }">
-          <img :src="row.logoUrl" />
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="row.logoUrl"
+            :zoom-rate="1"
+            :initial-index="1.2"
+            preview-teleported
+            :preview-src-list="[row.logoUrl]"
+            fit="fill"
+          />
         </template>
       </el-table-column>
       <el-table-column label="操作">
@@ -23,7 +31,7 @@
             type="primary"
             size="small"
             icon="Delete"
-            @click="removeTradeMark(row)"
+            @click="removeTradeMark(row.id)"
           ></el-button>
         </template>
       </el-table-column>
@@ -39,17 +47,33 @@
       @current-change="getHasTrademark"
     />
   </el-card>
+  <TradeDialog
+    ref="trademark"
+    @update="getHasTrademark"
+    :trademarkData="trademarkParams"
+    :pageNo="pageNo"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { reqHasTrademark } from "@/api/product/trademark";
-import { TradeMarkResponseData, Records } from "@/api/product/trademark/type";
+import { ref, onMounted, reactive } from "vue";
+import { reqHasTrademark, reqDeleteTrademark } from "@/api/product/trademark";
+import {
+  TradeMarkResponseData,
+  TradeMark,
+  Records,
+} from "@/api/product/trademark/type";
+import TradeDialog from "./components/dialog.vue";
 
 const pageNo = ref<number>(1);
 const pageSize = ref<number>(5);
 const trademarkTotal = ref<number>(0);
 const trademarkArr = ref<Records>([]);
+const trademark = ref();
+const trademarkParams = reactive<TradeMark>({
+  tmName: "",
+  logoUrl: "",
+});
 
 const getHasTrademark = async (pager = 1) => {
   pageNo.value = pager;
@@ -63,18 +87,40 @@ const getHasTrademark = async (pager = 1) => {
     trademarkArr.value = records;
   }
 };
+
 const onPageSizeChange = () => {
   getHasTrademark();
 };
 
-const addTradeMark = () => {};
-
-const updateTradeMark = (row: any) => {
-  console.log(row);
+const addTradeMark = () => {
+  trademarkParams.id = 0;
+  trademarkParams.tmName = "";
+  trademarkParams.logoUrl = "";
+  trademark.value.openPopups();
 };
 
-const removeTradeMark = (row: any) => {
-  console.log(row);
+const updateTradeMark = (row: any) => {
+  Object.assign(trademarkParams, row);
+  trademark.value.openPopups();
+};
+
+const removeTradeMark = async (id: number) => {
+  const res = await reqDeleteTrademark(id);
+  if (res.code === 200) {
+    ElMessage({
+      type: "success",
+      message: "删除品牌成功",
+    });
+    //再次获取已有的品牌数据
+    getHasTrademark(
+      trademarkArr.value.length > 1 ? pageNo.value : pageNo.value - 1
+    );
+  } else {
+    ElMessage({
+      type: "error",
+      message: "删除品牌失败",
+    });
+  }
 };
 
 onMounted(() => {

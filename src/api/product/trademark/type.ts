@@ -4,12 +4,12 @@ export interface ResponseData {
   ok: boolean;
 }
 
-export interface Trademark {
+export interface TradeMark {
   id?: number;
   tmName: string;
   logoUrl: string;
 }
-export type Records = Trademark[];
+export type Records = TradeMark[];
 
 export interface TradeMarkResponseData extends ResponseData {
   data: {
