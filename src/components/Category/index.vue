@@ -2,7 +2,11 @@
   <el-card>
     <el-form :inline="true">
       <el-form-item label="一级分类">
-        <el-select v-model="categoryStore.c1Id" @change="handleChangeC1" :disabled="!scene">
+        <el-select
+          v-model="categoryStore.c1Id"
+          @change="handleChangeC1"
+          :disabled="!scene"
+        >
           <el-option
             v-for="c1 in categoryStore.c1Arr"
             :key="c1.id"
@@ -12,7 +16,11 @@
         </el-select>
       </el-form-item>
       <el-form-item label="二级分类">
-        <el-select v-model="categoryStore.c2Id" @change="handleChangeC2" :disabled="!scene">
+        <el-select
+          v-model="categoryStore.c2Id"
+          @change="handleChangeC2"
+          :disabled="!scene"
+        >
           <el-option
             v-for="c2 in categoryStore.c2Arr"
             :key="c2.id"
@@ -41,12 +49,11 @@ import { onMounted } from "vue";
 
 const categoryStore = useCategoryStore();
 defineProps({
-  scene:{
-    type:Boolean,
-    default:true
-  }
-
-})
+  scene: {
+    type: Boolean,
+    default: true,
+  },
+});
 onMounted(() => {
   getC1();
 });
