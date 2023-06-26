@@ -55,7 +55,7 @@
             <el-input
               placeholder="请你输入属性名称"
               v-model="attrParams.attrName"
-            ></el-input>
+            />
           </el-form-item>
         </el-form>
         <el-button
@@ -74,7 +74,7 @@
             width="80px"
             type="index"
             align="center"
-          ></el-table-column>
+          />
           <el-table-column>
             <template #="{ row, $index }">
               <el-input
@@ -126,7 +126,7 @@ import useCategoryStore from "@/store/modules/category";
 
 const categoryStore = useCategoryStore();
 const attrArr = ref<Attr[]>([]);
-const scene = ref<boolean>(true);
+const scene = ref<number>(0);
 const inputArr = ref<any>([]);
 const attrParams = reactive<Attr>({
   attrName: "",
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
 const save = async () => {
   let res: any = await reqAddOrUpdateAttr(attrParams);
   if (res.code === 200) {
-    scene.value = true;
+    scene.value = 0;
     ElMessage({
       type: "success",
       message: attrParams.id ? "修改成功" : "添加成功",
@@ -173,7 +173,7 @@ const getAttr = async () => {
 };
 
 const updateAttr = (row: Attr) => {
-  scene.value = false;
+  scene.value = 1;
   Object.assign(attrParams, JSON.parse(JSON.stringify(row)));
 };
 
@@ -184,7 +184,7 @@ const addAttr = () => {
     categoryId: categoryStore.c3Id,
     categoryLevel: 3,
   });
-  scene.value = false;
+  scene.value = 1;
 };
 
 const deleteAttr = async (attrId: number) => {
@@ -214,7 +214,7 @@ const addAttrValue = () => {
 };
 
 const cancel = () => {
-  scene.value = true;
+  scene.value = 0;
 };
 
 const toLook = (row: AttrValue, $index: number) => {

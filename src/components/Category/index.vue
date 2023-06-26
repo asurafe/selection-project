@@ -5,7 +5,7 @@
         <el-select
           v-model="categoryStore.c1Id"
           @change="handleChangeC1"
-          :disabled="!scene"
+          :disabled="scene"
         >
           <el-option
             v-for="c1 in categoryStore.c1Arr"
@@ -19,7 +19,7 @@
         <el-select
           v-model="categoryStore.c2Id"
           @change="handleChangeC2"
-          :disabled="!scene"
+          :disabled="scene"
         >
           <el-option
             v-for="c2 in categoryStore.c2Arr"
@@ -30,7 +30,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="三级分类">
-        <el-select v-model="categoryStore.c3Id" :disabled="!scene">
+        <el-select v-model="categoryStore.c3Id" :disabled="scene">
           <el-option
             v-for="c3 in categoryStore.c3Arr"
             :key="c3.id"
@@ -50,8 +50,8 @@ import { onMounted } from "vue";
 const categoryStore = useCategoryStore();
 defineProps({
   scene: {
-    type: Boolean,
-    default: true,
+    type: Number,
+    default: 0,
   },
 });
 onMounted(() => {
