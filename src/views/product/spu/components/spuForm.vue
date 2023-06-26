@@ -1,10 +1,7 @@
 <template>
   <el-form label-width="100px">
     <el-form-item label="SPU名称">
-      <el-input
-        placeholder="请你输入SPU名称"
-        v-model="SpuParams.spuName"
-      />
+      <el-input placeholder="请你输入SPU名称" v-model="SpuParams.spuName" />
     </el-form-item>
     <el-form-item label="SPU品牌">
       <el-select v-model="SpuParams.tmId">
@@ -161,7 +158,6 @@ import {
   reqAddOrUpdateSpu,
 } from "@/api/product/spu";
 import { ref, computed, nextTick } from "vue";
-
 
 let AllTradeMark = ref<Trademark[]>([]);
 let imgList = ref<SpuImg[]>([]);
@@ -341,6 +337,5 @@ const initAddSpu = async (c3Id: number | string) => {
 };
 
 defineExpose({ initHasSpuData, initAddSpu });
-
 </script>
 <style lang="scss" scoped></style>
