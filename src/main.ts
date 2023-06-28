@@ -6,7 +6,7 @@ import pinia from "./store";
 import globalComponent from "@/components/index";
 import "@/style/index.scss";
 import "@/permisstion.ts";
-import 'element-plus/theme-chalk/dark/css-vars.css'
+import "element-plus/theme-chalk/dark/css-vars.css";
 
 const app = createApp(App);
 app.use(globalComponent);
