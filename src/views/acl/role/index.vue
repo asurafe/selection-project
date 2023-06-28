@@ -124,175 +124,175 @@
   </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick } from 'vue'
+import { ref, onMounted, reactive, nextTick } from "vue";
 import {
   reqRemoveRole,
   reqAllRoleList,
   reqAddOrUpdateRole,
   reqAllMenuList,
   reqSetPermission,
-} from '@/api/acl/role'
+} from "@/api/acl/role";
 import type {
   RoleResponseData,
   Records,
   RoleData,
   MenuResponseData,
   MenuList,
-} from '@/api/acl/role/type'
-import useLayOutSettingStore from '@/store/setting'
-let pageNo = ref<number>(1)
+} from "@/api/acl/role/type";
+import useLayOutSettingStore from "@/store/setting";
+let pageNo = ref<number>(1);
 
-let pageSize = ref<number>(10)
+let pageSize = ref<number>(10);
 
-let settingStore = useLayOutSettingStore()
+let settingStore = useLayOutSettingStore();
 
-let dialogVisible = ref<boolean>(false)
+let dialogVisible = ref<boolean>(false);
 
 let RoleParams = reactive<RoleData>({
-  roleName: '',
-})
+  roleName: "",
+});
 
 onMounted(() => {
-  getHasRole()
-})
+  getHasRole();
+});
 
-let keyword = ref<string>('')
+let keyword = ref<string>("");
 
-let allRole = ref<Records>([])
+let allRole = ref<Records>([]);
 
-let total = ref<number>(0)
-let form = ref<any>()
+let total = ref<number>(0);
+let form = ref<any>();
 
-let drawer = ref<boolean>(false)
+let drawer = ref<boolean>(false);
 
-let menuArr = ref<MenuList>([])
+let menuArr = ref<MenuList>([]);
 
-let selectArr = ref<number[]>([])
+let selectArr = ref<number[]>([]);
 
-let tree = ref<any>()
+let tree = ref<any>();
 const getHasRole = async (pager = 1) => {
-  pageNo.value = pager
+  pageNo.value = pager;
   let res: RoleResponseData = await reqAllRoleList(
     pageNo.value,
     pageSize.value,
-    keyword.value,
-  )
+    keyword.value
+  );
   if (res.code === 200) {
-    total.value = res.data.total
-    allRole.value = res.data.records
+    total.value = res.data.total;
+    allRole.value = res.data.records;
   }
-}
+};
 
 const sizeHandler = () => {
-  getHasRole()
-}
+  getHasRole();
+};
 
 const search = () => {
-  getHasRole()
-  keyword.value = ''
-}
+  getHasRole();
+  keyword.value = "";
+};
 
 const reset = () => {
-  settingStore.refresh = !settingStore.refresh
-}
+  settingStore.refresh = !settingStore.refresh;
+};
 
 const addRole = () => {
-  dialogVisible.value = true
+  dialogVisible.value = true;
   Object.assign(RoleParams, {
-    roleName: '',
+    roleName: "",
     id: 0,
-  })
+  });
   nextTick(() => {
-    form.value.clearValidate('roleName')
-  })
-}
+    form.value.clearValidate("roleName");
+  });
+};
 
 const updateRole = (row: RoleData) => {
-  dialogVisible.value = true
-  Object.assign(RoleParams, row)
+  dialogVisible.value = true;
+  Object.assign(RoleParams, row);
   nextTick(() => {
-    form.value.clearValidate('roleName')
-  })
-}
+    form.value.clearValidate("roleName");
+  });
+};
 
 const validateRoleName = (rule: any, value: any, callBack: any) => {
   if (value.trim().length >= 2) {
-    callBack()
+    callBack();
   } else {
-    callBack(new Error('职位名称至少两位'))
+    callBack(new Error("职位名称至少两位"));
   }
-}
+};
 
 const rules = {
-  roleName: [{ required: true, trigger: 'blur', validator: validateRoleName }],
-}
+  roleName: [{ required: true, trigger: "blur", validator: validateRoleName }],
+};
 
 const save = async () => {
-  await form.value.validate()
-  let res: any = await reqAddOrUpdateRole(RoleParams)
+  await form.value.validate();
+  let res: any = await reqAddOrUpdateRole(RoleParams);
   if (res.code === 200) {
     ElMessage({
-      type: 'success',
-      message: RoleParams.id ? '更新成功' : '添加成功',
-    })
-    dialogVisible.value = false
-    getHasRole(RoleParams.id ? pageNo.value : 1)
+      type: "success",
+      message: RoleParams.id ? "更新成功" : "添加成功",
+    });
+    dialogVisible.value = false;
+    getHasRole(RoleParams.id ? pageNo.value : 1);
   }
-}
+};
 
 const setPermission = async (row: RoleData) => {
-  drawer.value = true
-  Object.assign(RoleParams, row)
-  let res: MenuResponseData = await reqAllMenuList(RoleParams.id as number)
+  drawer.value = true;
+  Object.assign(RoleParams, row);
+  let res: MenuResponseData = await reqAllMenuList(RoleParams.id as number);
   if (res.code === 200) {
-    menuArr.value = res.data
-    selectArr.value = filterSelectArr(menuArr.value, [])
+    menuArr.value = res.data;
+    selectArr.value = filterSelectArr(menuArr.value, []);
   }
-}
+};
 
 const defaultProps = {
-  children: 'children',
-  label: 'name',
-}
+  children: "children",
+  label: "name",
+};
 
 const filterSelectArr = (allData: any, initArr: any) => {
   allData.forEach((item: any) => {
     if (item.select && item.level === 4) {
-      initArr.push(item.id)
+      initArr.push(item.id);
     }
     if (item.children && item.children.length > 0) {
-      filterSelectArr(item.children, initArr)
+      filterSelectArr(item.children, initArr);
     }
-  })
-  return initArr
-}
+  });
+  return initArr;
+};
 
 const handler = async () => {
-  const roleId = RoleParams.id as number
-  let arr = tree.value.getCheckedKeys()
-  let arr1 = tree.value.getHalfCheckedKeys()
-  let permissionId = arr.concat(arr1)
-  let res: any = await reqSetPermission(roleId, permissionId)
+  const roleId = RoleParams.id as number;
+  let arr = tree.value.getCheckedKeys();
+  let arr1 = tree.value.getHalfCheckedKeys();
+  let permissionId = arr.concat(arr1);
+  let res: any = await reqSetPermission(roleId, permissionId);
   if (res.code === 200) {
-    drawer.value = false
+    drawer.value = false;
     ElMessage({
-      type: 'success',
-      message: '分配权限成功',
-    })
-    window.location.reload()
+      type: "success",
+      message: "分配权限成功",
+    });
+    window.location.reload();
   }
-}
+};
 
 const removeRole = async (id: number) => {
-  let res: any = await reqRemoveRole(id)
+  let res: any = await reqRemoveRole(id);
   if (res.code === 200) {
     ElMessage({
-      type: 'success',
-      message: '删除成功',
-    })
-    getHasRole(allRole.value.length > 1 ? pageNo.value : pageNo.value - 1)
+      type: "success",
+      message: "删除成功",
+    });
+    getHasRole(allRole.value.length > 1 ? pageNo.value : pageNo.value - 1);
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .form {
