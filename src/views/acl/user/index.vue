@@ -108,7 +108,7 @@
   </el-card>
   <el-drawer v-model="drawer">
     <template #header>
-      <h4>{{ userParams.id ? '更新用户' : '添加用户' }}</h4>
+      <h4>{{ userParams.id ? "更新用户" : "添加用户" }}</h4>
     </template>
     <template #default>
       <el-form :model="userParams" :rules="rules" ref="formRef">
@@ -180,7 +180,7 @@
   </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick } from 'vue'
+import { ref, onMounted, reactive, nextTick } from "vue";
 import {
   reqUserInfo,
   reqAddOrUpdateUser,
@@ -188,7 +188,7 @@ import {
   reqSetUserRole,
   reqRemoveUser,
   reqSelectUser,
-} from '@/api/acl/user'
+} from "@/api/acl/user";
 import type {
   UserResponseData,
   Records,
@@ -196,209 +196,209 @@ import type {
   AllRoleResponseData,
   AllRole,
   SetRoleData,
-} from '@/api/acl/user/type'
-import useLayOutSettingStore from '@/store/setting'
-let pageNo = ref<number>(1)
+} from "@/api/acl/user/type";
+import useLayOutSettingStore from "@/store/setting";
+let pageNo = ref<number>(1);
 
-let pageSize = ref<number>(5)
+let pageSize = ref<number>(5);
 
-let total = ref<number>(0)
+let total = ref<number>(0);
 
-let userArr = ref<Records>([])
+let userArr = ref<Records>([]);
 
-let drawer = ref<boolean>(false)
-let drawer1 = ref<boolean>(false)
+let drawer = ref<boolean>(false);
+let drawer1 = ref<boolean>(false);
 
-let allRole = ref<AllRole>([])
+let allRole = ref<AllRole>([]);
 
-let userRole = ref<AllRole>([])
+let userRole = ref<AllRole>([]);
 let userParams = reactive<User>({
-  username: '',
-  name: '',
-  password: '',
-})
+  username: "",
+  name: "",
+  password: "",
+});
 
-let selectIdArr = ref<User[]>([])
+let selectIdArr = ref<User[]>([]);
 onMounted(() => {
-  getHasUser()
-})
+  getHasUser();
+});
 
-let formRef = ref<any>()
-let keyword = ref<string>('')
+let formRef = ref<any>();
+let keyword = ref<string>("");
 
-let settingStore = useLayOutSettingStore()
+let settingStore = useLayOutSettingStore();
 const getHasUser = async (pager = 1) => {
-  pageNo.value = pager
+  pageNo.value = pager;
   let res: UserResponseData = await reqUserInfo(
     pageNo.value,
     pageSize.value,
-    keyword.value,
-  )
+    keyword.value
+  );
   if (res.code === 200) {
-    total.value = res.data.total
-    userArr.value = res.data.records
+    total.value = res.data.total;
+    userArr.value = res.data.records;
   }
-}
+};
 
 const handler = () => {
-  getHasUser()
-}
+  getHasUser();
+};
 
 const addUser = () => {
-  drawer.value = true
+  drawer.value = true;
   Object.assign(userParams, {
     id: 0,
-    username: '',
-    name: '',
-    password: '',
-  })
+    username: "",
+    name: "",
+    password: "",
+  });
   nextTick(() => {
-    formRef.value.clearValidate('username')
-    formRef.value.clearValidate('name')
-    formRef.value.clearValidate('password')
-  })
-}
+    formRef.value.clearValidate("username");
+    formRef.value.clearValidate("name");
+    formRef.value.clearValidate("password");
+  });
+};
 
 const updateUser = (row: User) => {
-  drawer.value = true
-  Object.assign(userParams, row)
+  drawer.value = true;
+  Object.assign(userParams, row);
   nextTick(() => {
-    formRef.value.clearValidate('username')
-    formRef.value.clearValidate('name')
-  })
-}
+    formRef.value.clearValidate("username");
+    formRef.value.clearValidate("name");
+  });
+};
 
 const save = async () => {
-  formRef.value.validate()
-  let res: any = await reqAddOrUpdateUser(userParams)
+  formRef.value.validate();
+  let res: any = await reqAddOrUpdateUser(userParams);
   if (res.code === 200) {
-    drawer.value = false
+    drawer.value = false;
     ElMessage({
-      type: 'success',
-      message: userParams.id ? '更新成功' : '添加成功',
-    })
-    window.location.reload()
+      type: "success",
+      message: userParams.id ? "更新成功" : "添加成功",
+    });
+    window.location.reload();
   } else {
-    drawer.value = false
+    drawer.value = false;
     ElMessage({
-      type: 'error',
-      message: userParams.id ? '更新失败' : '添加失败',
-    })
+      type: "error",
+      message: userParams.id ? "更新失败" : "添加失败",
+    });
   }
-}
+};
 
 const cancel = () => {
-  drawer.value = false
-}
+  drawer.value = false;
+};
 
 const validatorUserName = (rule: any, value: any, callBack: any) => {
-  console.log(rule)
+  console.log(rule);
   if (value.trim().length >= 5) {
-    callBack()
+    callBack();
   } else {
-    callBack(new Error('用户名字至少五位'))
+    callBack(new Error("用户名字至少五位"));
   }
-}
+};
 
 const validatorName = (rule: any, value: any, callBack: any) => {
-  console.log(rule)
+  console.log(rule);
   if (value.trim().length >= 5) {
-    callBack()
+    callBack();
   } else {
-    callBack(new Error('用户昵称至少五位'))
+    callBack(new Error("用户昵称至少五位"));
   }
-}
+};
 
 const validatorPassword = (rule: any, value: any, callBack: any) => {
-  console.log(rule)
+  console.log(rule);
   if (value.trim().length >= 5) {
-    callBack()
+    callBack();
   } else {
-    callBack(new Error('用户密码至少六位'))
+    callBack(new Error("用户密码至少六位"));
   }
-}
+};
 
 const rules = {
-  username: [{ required: true, trigger: 'blur', validator: validatorUserName }],
-  name: [{ required: true, trigger: 'blur', validator: validatorName }],
-  password: [{ required: true, trigger: 'blur', validator: validatorPassword }],
-}
+  username: [{ required: true, trigger: "blur", validator: validatorUserName }],
+  name: [{ required: true, trigger: "blur", validator: validatorName }],
+  password: [{ required: true, trigger: "blur", validator: validatorPassword }],
+};
 
 const setRole = async (row: User) => {
-  drawer1.value = true
-  Object.assign(userParams, row)
-  let res: AllRoleResponseData = await reqAllRole(userParams.id as number)
+  drawer1.value = true;
+  Object.assign(userParams, row);
+  let res: AllRoleResponseData = await reqAllRole(userParams.id as number);
   if (res.code === 200) {
-    allRole.value = res.data.allRolesList
-    userRole.value = res.data.assignRoles
-    drawer1.value = true
+    allRole.value = res.data.allRolesList;
+    userRole.value = res.data.assignRoles;
+    drawer1.value = true;
   }
-}
+};
 
-const checkAll = ref<boolean>(false)
-const isIndeterminate = ref<boolean>(true)
+const checkAll = ref<boolean>(false);
+const isIndeterminate = ref<boolean>(true);
 
 const handleCheckAllChange = (val: boolean) => {
-  userRole.value = val ? allRole.value : []
-  isIndeterminate.value = false
-}
+  userRole.value = val ? allRole.value : [];
+  isIndeterminate.value = false;
+};
 
 const handleCheckedUsersChange = (value: string[]) => {
-  const checkedCount = value.length
-  checkAll.value = checkedCount === allRole.value.length
+  const checkedCount = value.length;
+  checkAll.value = checkedCount === allRole.value.length;
   isIndeterminate.value =
-    checkedCount > 0 && checkedCount < allRole.value.length
-}
+    checkedCount > 0 && checkedCount < allRole.value.length;
+};
 
 const confirmClick = async () => {
   let data: SetRoleData = {
     userId: userParams.id as number,
     roleIdList: userRole.value.map((item) => {
-      return item.id as number
+      return item.id as number;
     }),
-  }
-  let res: any = await reqSetUserRole(data)
+  };
+  let res: any = await reqSetUserRole(data);
   if (res.code === 200) {
     ElMessage({
-      type: 'success',
-      message: '分配职务成功',
-    })
-    drawer1.value = false
-    getHasUser(pageNo.value)
+      type: "success",
+      message: "分配职务成功",
+    });
+    drawer1.value = false;
+    getHasUser(pageNo.value);
   }
-}
+};
 
 const deleteUser = async (userId: number) => {
-  let res: any = await reqRemoveUser(userId)
+  let res: any = await reqRemoveUser(userId);
   if (res.code === 200) {
-    ElMessage({ type: 'success', message: '删除成功' })
-    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+    ElMessage({ type: "success", message: "删除成功" });
+    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1);
   }
-}
+};
 
 const selectChange = (value: any) => {
-  selectIdArr.value = value
-}
+  selectIdArr.value = value;
+};
 
 const deleteSelectUser = async () => {
   let idList: any = selectIdArr.value.map((item) => {
-    return item.id
-  })
-  let res: any = await reqSelectUser(idList)
+    return item.id;
+  });
+  let res: any = await reqSelectUser(idList);
   if (res.code === 200) {
-    ElMessage({ type: 'success', message: '删除成功' })
-    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+    ElMessage({ type: "success", message: "删除成功" });
+    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1);
   }
-}
+};
 
 const search = () => {
-  getHasUser()
-  keyword.value = ''
-}
+  getHasUser();
+  keyword.value = "";
+};
 
 const reset = () => {
-  settingStore.refresh = !settingStore.refresh
-}
+  settingStore.refresh = !settingStore.refresh;
+};
 </script>
 <style lang="scss" scoped>
 .form {
