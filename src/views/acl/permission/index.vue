@@ -1,4 +1,3 @@
-
 <template>
   <el-table
     style="width: 100%; margin-bottom: 20px"
@@ -16,7 +15,7 @@
           :disabled="row.level === 4 ? true : false"
           @click="addPermission(row)"
         >
-          {{ row.level === 3 ? '添加功能' : '添加菜单' }}
+          {{ row.level === 3 ? "添加功能" : "添加菜单" }}
         </el-button>
         <el-button
           type="primary"
@@ -71,77 +70,76 @@
   </el-dialog>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive } from "vue";
 import {
   reqAllPermission,
   reqAddOrUpdateMenu,
   reqRemoveMenu,
-} from '@/api/acl/menu'
+} from "@/api/acl/menu";
 import type {
   PermissionResponseData,
   PermissionList,
   Permission,
   MenuParams,
-} from '@/api/acl/menu/type'
+} from "@/api/acl/menu/type";
 
-let PermissionArr = ref<PermissionList>([])
-let dialogVisible = ref<boolean>(false)
+let PermissionArr = ref<PermissionList>([]);
+let dialogVisible = ref<boolean>(false);
 let menuData = reactive<MenuParams>({
-  code: '',
+  code: "",
   level: 0,
-  name: '',
+  name: "",
   pid: 0,
-})
+});
 
 onMounted(() => {
-  getHasPermission()
-})
+  getHasPermission();
+});
 
 const getHasPermission = async () => {
-  let res: PermissionResponseData = await reqAllPermission()
+  let res: PermissionResponseData = await reqAllPermission();
   if (res.code === 200) {
-    PermissionArr.value = res.data
+    PermissionArr.value = res.data;
   }
-}
+};
 
 const addPermission = (row: Permission) => {
   Object.assign(menuData, {
     id: 0,
-    code: '',
+    code: "",
     level: 0,
-    name: '',
+    name: "",
     pid: 0,
-  })
-  dialogVisible.value = true
-  menuData.level = row.level + 1
-  menuData.pid = row.id as number
-}
+  });
+  dialogVisible.value = true;
+  menuData.level = row.level + 1;
+  menuData.pid = row.id as number;
+};
 
 const updatePermission = (row: Permission) => {
-  dialogVisible.value = true
-  Object.assign(menuData, row)
-}
+  dialogVisible.value = true;
+  Object.assign(menuData, row);
+};
 
 const save = async () => {
-  dialogVisible.value = false
-  let res: any = await reqAddOrUpdateMenu(menuData)
+  dialogVisible.value = false;
+  let res: any = await reqAddOrUpdateMenu(menuData);
   if (res.code === 200) {
-    dialogVisible.value = false
+    dialogVisible.value = false;
     ElMessage({
-      type: 'success',
-      message: menuData.id ? '更新成功' : '添加成功',
-    })
-    getHasPermission()
+      type: "success",
+      message: menuData.id ? "更新成功" : "添加成功",
+    });
+    getHasPermission();
   }
-}
+};
 
 const removeMenu = async (id: number) => {
-  let res = await reqRemoveMenu(id)
+  let res = await reqRemoveMenu(id);
   if (res.code === 200) {
-    ElMessage({ type: 'success', message: '删除成功' })
+    ElMessage({ type: "success", message: "删除成功" });
   }
-  getHasPermission()
-  
-}
+  getHasPermission();
+};
 </script>
 <style lang="scss" scoped></style>

@@ -16,11 +16,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getTime } from '@/utils/time'
+import { getTime } from "@/utils/time";
 import { userStore } from "@/store/modules/user";
 
 const useUserStore = userStore();
-
 </script>
 <style lang="scss" scoped>
 .box {
