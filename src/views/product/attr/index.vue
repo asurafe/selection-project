@@ -2,7 +2,7 @@
   <div>
     <Category :scene="scene" />
     <el-card class="card-box">
-      <div v-if="scene">
+      <div v-if="scene == 0">
         <el-button
           type="primary"
           icon="Plus"
