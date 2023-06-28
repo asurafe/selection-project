@@ -9,25 +9,25 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from 'echarts'
-import { ref, onMounted } from 'vue'
+import * as echarts from "echarts";
+import { ref, onMounted } from "vue";
 //获取DOM节点
-let charts = ref()
+let charts = ref();
 //组件挂载完毕
 onMounted(() => {
   //一个容器可以同时展示多种类型的图形图标
-  let mychart = echarts.init(charts.value)
+  let mychart = echarts.init(charts.value);
   //设置配置项
   mychart.setOption({
     title: {
-      text: '散点图',
-      left: '40%',
+      text: "散点图",
+      left: "40%",
       textStyle: {
-        color: 'white',
+        color: "white",
       },
     },
     xAxis: {
-      type: 'category',
+      type: "category",
       show: true,
     },
     yAxis: {
@@ -40,24 +40,24 @@ onMounted(() => {
       bottom: 20,
     },
     series: {
-      type: 'scatter',
+      type: "scatter",
       data: [
         33, 88, 21, 9, 88, 234, 113, 1231, 674, 3, 88, 33, 21, 888, 3332, 313,
         123, 5, 657, 7,
       ],
       //标记图形设置
-      symbol: 'diamond',
+      symbol: "diamond",
       symbolSize: 16,
       //图文标签
       label: {
         show: true,
-        position: 'top',
-        color: 'red',
+        position: "top",
+        color: "red",
       },
       //散点图标记的颜色
       itemStyle: {
         color: {
-          type: 'linear',
+          type: "linear",
           x: 0,
           y: 0,
           x2: 0,
@@ -65,19 +65,19 @@ onMounted(() => {
           colorStops: [
             {
               offset: 0,
-              color: 'red', // 0% 处的颜色
+              color: "red", // 0% 处的颜色
             },
             {
               offset: 1,
-              color: 'blue', // 100% 处的颜色
+              color: "blue", // 100% 处的颜色
             },
           ],
           global: false, // 缺省为 false
         },
       },
     },
-  })
-})
+  });
+});
 </script>
 
 <style scoped lang="scss">

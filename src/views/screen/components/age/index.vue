@@ -10,53 +10,53 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 //引入echarts
-import * as echarts from 'echarts'
-let charts = ref()
+import * as echarts from "echarts";
+let charts = ref();
 //组件挂载完毕初始化图形图标
 onMounted(() => {
-  let mychart = echarts.init(charts.value)
+  let mychart = echarts.init(charts.value);
   //设置配置项
   let option = {
     tooltip: {
-      trigger: 'item',
+      trigger: "item",
     },
     legend: {
       right: 30,
       top: 40,
-      orient: 'vertical', //图例组件方向的设置
+      orient: "vertical", //图例组件方向的设置
       textStyle: {
-        color: 'white',
+        color: "white",
         fontSize: 14,
       },
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
+          borderColor: "#fff",
           borderWidth: 2,
         },
         label: {
           show: true,
-          position: 'inside',
-          color: 'white',
+          position: "inside",
+          color: "white",
         },
 
         labelLine: {
           show: false,
         },
         data: [
-          { value: 1048, name: '军事' },
-          { value: 735, name: '新闻' },
-          { value: 580, name: '直播' },
-          { value: 484, name: '娱乐' },
-          { value: 300, name: '财经' },
+          { value: 1048, name: "军事" },
+          { value: 735, name: "新闻" },
+          { value: 580, name: "直播" },
+          { value: 484, name: "娱乐" },
+          { value: 300, name: "财经" },
         ],
       },
     ],
@@ -67,9 +67,9 @@ onMounted(() => {
       right: 0,
       bottom: 0,
     },
-  }
-  mychart.setOption(option)
-})
+  };
+  mychart.setOption(option);
+});
 </script>
 
 <style scoped lang="scss">

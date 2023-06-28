@@ -3,21 +3,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as echarts from 'echarts'
+import { ref, onMounted } from "vue";
+import * as echarts from "echarts";
 //引入中国地图的JSON数据
-import chinaJSON from './china.json'
+import chinaJSON from "./china.json";
 //获取DOM元素
-let map = ref()
+let map = ref();
 //注册中国地图
-echarts.registerMap('china', chinaJSON as any)
+echarts.registerMap("china", chinaJSON as any);
 onMounted(() => {
-  let mychart = echarts.init(map.value)
+  let mychart = echarts.init(map.value);
   //设置配置项
   mychart.setOption({
     //地图组件
     geo: {
-      map: 'china', //中国地图
+      map: "china", //中国地图
       roam: true, //鼠标缩放的效果
       //地图的位置调试
       left: 150,
@@ -28,14 +28,14 @@ onMounted(() => {
       //地图上的文字的设置
       label: {
         show: true, //文字显示出来
-        color: 'white',
+        color: "white",
         fontSize: 14,
       },
 
       itemStyle: {
         //每一个多边形的样式
         color: {
-          type: 'linear',
+          type: "linear",
           x: 0,
           y: 0,
           x2: 0,
@@ -43,11 +43,11 @@ onMounted(() => {
           colorStops: [
             {
               offset: 0,
-              color: 'red', // 0% 处的颜色
+              color: "red", // 0% 处的颜色
             },
             {
               offset: 1,
-              color: 'blue', // 100% 处的颜色
+              color: "blue", // 100% 处的颜色
             },
           ],
           global: false, // 缺省为 false
@@ -57,7 +57,7 @@ onMounted(() => {
       //地图高亮的效果
       emphasis: {
         itemStyle: {
-          color: 'red',
+          color: "red",
         },
         label: {
           fontSize: 40,
@@ -73,7 +73,7 @@ onMounted(() => {
     },
     series: [
       {
-        type: 'lines', //航线的系列
+        type: "lines", //航线的系列
         data: [
           {
             coords: [
@@ -82,7 +82,7 @@ onMounted(() => {
             ],
             // 统一的样式设置
             lineStyle: {
-              color: 'orange',
+              color: "orange",
               width: 5,
             },
           },
@@ -93,7 +93,7 @@ onMounted(() => {
             ],
             // 统一的样式设置
             lineStyle: {
-              color: 'yellow',
+              color: "yellow",
               width: 5,
             },
           },
@@ -101,14 +101,14 @@ onMounted(() => {
         //开启动画特效
         effect: {
           show: true,
-          symbol: 'arrow',
-          color: 'black',
+          symbol: "arrow",
+          color: "black",
           symbolSize: 10,
         },
       },
     ],
-  })
-})
+  });
+});
 </script>
 
 <style scoped></style>

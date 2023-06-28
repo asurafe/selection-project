@@ -10,39 +10,39 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from 'echarts'
-import { ref, onMounted } from 'vue'
+import * as echarts from "echarts";
+import { ref, onMounted } from "vue";
 //获取DOM节点
-let charts = ref()
+let charts = ref();
 //组件挂载完毕
 onMounted(() => {
   //一个容器可以同时展示多种类型的图形图标
-  let mychart = echarts.init(charts.value)
+  let mychart = echarts.init(charts.value);
   //设置配置项
   mychart.setOption({
     //标题组件
     title: {
       //主标题
-      text: '景区排行',
-      link: 'http://www.baidu.com',
+      text: "景区排行",
+      link: "http://www.baidu.com",
       //标题的位置
-      left: '50%',
+      left: "50%",
       //主标题文字样式
       textStyle: {
-        color: 'yellowgreen',
+        color: "yellowgreen",
         fontSize: 20,
       },
       //子标题
-      subtext: '各大景区排行',
+      subtext: "各大景区排行",
       //子标题的样式
       subtextStyle: {
-        color: 'yellowgreen',
+        color: "yellowgreen",
         fontSize: 16,
       },
     },
     //x|y轴组件
     xAxis: {
-      type: 'category', //图形图标在x轴均匀分布展示
+      type: "category", //图形图标在x轴均匀分布展示
     },
     yAxis: {},
     //布局组件
@@ -54,22 +54,22 @@ onMounted(() => {
     //系列:决定显示图形图标是哪一种的
     series: [
       {
-        type: 'bar',
+        type: "bar",
         data: [10, 20, 30, 40, 50, 60, 70],
         //柱状图的:图形上的文本标签，
         label: {
           show: true,
           //文字的位置
-          position: 'insideTop',
+          position: "insideTop",
           //文字颜色
-          color: 'yellowgreen',
+          color: "yellowgreen",
         },
         //是否显示背景颜色
         showBackground: true,
         backgroundStyle: {
           //底部背景的颜色
           color: {
-            type: 'linear',
+            type: "linear",
             x: 0,
             y: 0,
             x2: 0,
@@ -77,11 +77,11 @@ onMounted(() => {
             colorStops: [
               {
                 offset: 0,
-                color: 'black', // 0% 处的颜色
+                color: "black", // 0% 处的颜色
               },
               {
                 offset: 1,
-                color: 'blue', // 100% 处的颜色
+                color: "blue", // 100% 处的颜色
               },
             ],
             global: false, // 缺省为 false
@@ -94,40 +94,40 @@ onMounted(() => {
           color: function (data: any) {
             //给每一个柱条这是背景颜色
             let arr = [
-              'red',
-              'orange',
-              'yellowgreen',
-              'green',
-              'purple',
-              'hotpink',
-              'skyblue',
-            ]
-            return arr[data.dataIndex]
+              "red",
+              "orange",
+              "yellowgreen",
+              "green",
+              "purple",
+              "hotpink",
+              "skyblue",
+            ];
+            return arr[data.dataIndex];
           },
         },
       },
       {
-        type: 'line',
+        type: "line",
         data: [10, 20, 30, 40, 50, 60, 90],
         smooth: true, //平滑曲线
       },
       {
-        type: 'bar',
+        type: "bar",
         data: [10, 20, 30, 40, 50, 60, 70],
         //柱状图的:图形上的文本标签，
         label: {
           show: true,
           //文字的位置
-          position: 'insideTop',
+          position: "insideTop",
           //文字颜色
-          color: 'yellowgreen',
+          color: "yellowgreen",
         },
         //是否显示背景颜色
         showBackground: true,
         backgroundStyle: {
           //底部背景的颜色
           color: {
-            type: 'linear',
+            type: "linear",
             x: 0,
             y: 0,
             x2: 0,
@@ -135,11 +135,11 @@ onMounted(() => {
             colorStops: [
               {
                 offset: 0,
-                color: 'black', // 0% 处的颜色
+                color: "black", // 0% 处的颜色
               },
               {
                 offset: 1,
-                color: 'blue', // 100% 处的颜色
+                color: "blue", // 100% 处的颜色
               },
             ],
             global: false, // 缺省为 false
@@ -152,24 +152,24 @@ onMounted(() => {
           color: function (data: any) {
             //给每一个柱条这是背景颜色
             let arr = [
-              'red',
-              'orange',
-              'yellowgreen',
-              'green',
-              'purple',
-              'hotpink',
-              'skyblue',
-            ]
-            return arr[data.dataIndex]
+              "red",
+              "orange",
+              "yellowgreen",
+              "green",
+              "purple",
+              "hotpink",
+              "skyblue",
+            ];
+            return arr[data.dataIndex];
           },
         },
       },
     ],
     tooltip: {
-      backgroundColor: 'rgba(50,50,50,0.7)',
+      backgroundColor: "rgba(50,50,50,0.7)",
     },
-  })
-})
+  });
+});
 </script>
 
 <style scoped lang="scss">

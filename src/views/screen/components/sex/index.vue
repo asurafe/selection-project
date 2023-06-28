@@ -21,23 +21,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as echarts from 'echarts'
+import { ref, onMounted } from "vue";
+import * as echarts from "echarts";
 //获取图形图标的DOM节点
-let charts = ref()
+let charts = ref();
 onMounted(() => {
   //初始化echarts实例
-  let mycharts = echarts.init(charts.value)
+  let mycharts = echarts.init(charts.value);
   //设置配置项
   mycharts.setOption({
     //组件标题
     title: {
-      text: '男女比例', //主标题
+      text: "男女比例", //主标题
       textStyle: {
         //主标题颜色
-        color: 'skyblue',
+        color: "skyblue",
       },
-      left: '40%',
+      left: "40%",
     },
     //x|y
     xAxis: {
@@ -47,27 +47,27 @@ onMounted(() => {
     },
     yAxis: {
       show: false,
-      type: 'category',
+      type: "category",
     },
     series: [
       {
-        type: 'bar',
+        type: "bar",
         data: [58],
         barWidth: 20,
         z: 100,
         itemStyle: {
-          color: 'skyblue',
+          color: "skyblue",
           borderRadius: 20,
         },
       },
       {
-        type: 'bar',
+        type: "bar",
         data: [100],
         barWidth: 20,
         //调整女士柱条位置
-        barGap: '-100%',
+        barGap: "-100%",
         itemStyle: {
-          color: 'pink',
+          color: "pink",
           borderRadius: 20,
         },
       },
@@ -78,8 +78,8 @@ onMounted(() => {
       right: 0,
       bottom: 0,
     },
-  })
-})
+  });
+});
 </script>
 
 <style scoped lang="scss">
