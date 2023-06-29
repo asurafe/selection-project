@@ -32,6 +32,7 @@ export const userStore = defineStore("user", {
       menuRoutes: constantRoute,
       avatar: "",
       username: "",
+      buttons: [],
     };
   },
   actions: {
@@ -53,8 +54,10 @@ export const userStore = defineStore("user", {
     async userInfor() {
       const res: userInfoResponseData = await reqUserInfo();
       if (res.code == 200) {
-        this.username = res.data.name as string;
-        this.avatar = res.data.avatar as string;
+        const { name, avatar, buttons } = res.data;
+        this.username = name as string;
+        this.avatar = avatar as string;
+        this.buttons = buttons as [];
         let userAsyncRoute = filterAsyncRoute(
           cloneDeep(asyncRoute),
           res.data.routes
