@@ -22,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           await useUserStore.userInfor();
-          next({...to});
+          next({ ...to });
         } catch (error) {
           await useUserStore.userLayout();
           next({ path: "/login" });

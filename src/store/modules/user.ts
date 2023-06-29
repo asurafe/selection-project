@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
-import router from '@/router'
+import router from "@/router";
 import type {
   LoginFormData,
   LoginResponseData,
@@ -9,20 +9,20 @@ import type {
 } from "@/api/user/type";
 import type { UserState } from "./type";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
-import { constantRoute, asyncRoute, anyRoute } from '@/router/routes'
+import { constantRoute, asyncRoute, anyRoute } from "@/router/routes";
 
 // @ts-ignore
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from "lodash/cloneDeep";
 
 function filterAsyncRoute(asyncRoute: any, routes: any) {
   return asyncRoute.filter((item: any) => {
     if (routes.includes(item.name)) {
       if (item.children && item.children.length > 0) {
-        item.children = filterAsyncRoute(item.children, routes)
+        item.children = filterAsyncRoute(item.children, routes);
       }
-      return true
+      return true;
     }
-  })
+  });
 }
 
 export const userStore = defineStore("user", {
@@ -53,16 +53,16 @@ export const userStore = defineStore("user", {
     async userInfor() {
       const res: userInfoResponseData = await reqUserInfo();
       if (res.code == 200) {
-        this.username = res.data.name as string
-        this.avatar = res.data.avatar as string
+        this.username = res.data.name as string;
+        this.avatar = res.data.avatar as string;
         let userAsyncRoute = filterAsyncRoute(
           cloneDeep(asyncRoute),
-          res.data.routes,
-        )
-        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
-        ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
-          router.addRoute(route)
-        })
+          res.data.routes
+        );
+        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute];
+        [...userAsyncRoute, anyRoute].forEach((route: any) => {
+          router.addRoute(route);
+        });
         return "ok";
       } else {
         return Promise.reject(res.message);

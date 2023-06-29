@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-let $router = useRouter()
+import { useRouter } from "vue-router";
+let $router = useRouter();
 const goHome = () => {
-  $router.push('/home')
-}
+  $router.push("/home");
+};
 </script>
 <template>
   <p>
@@ -43,7 +43,7 @@ const goHome = () => {
   <center><a @click="goHome">HOME</a></center>
 </template>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Bevan');
+@import url("https://fonts.googleapis.com/css?family=Bevan");
 * {
   padding: 0;
   margin: 0;
@@ -56,7 +56,7 @@ body {
 }
 
 p {
-  font-family: 'Bevan', cursive;
+  font-family: "Bevan", cursive;
   font-size: 130px;
   margin: 10vh 0 0;
   text-align: center;
