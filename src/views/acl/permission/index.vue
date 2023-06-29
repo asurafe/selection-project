@@ -9,7 +9,7 @@
     <el-table-column prop="code" label="权限值" />
     <el-table-column prop="updateTime" label="修改时间" show-overflow-tooltip />
     <el-table-column label="操作" width="260px">
-      <template #="{ row, $index }">
+      <template #="{ row }">
         <el-button
           size="small"
           :disabled="row.level === 4 ? true : false"

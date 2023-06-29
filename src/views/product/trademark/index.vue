@@ -51,7 +51,7 @@
     </el-card>
     <TradeDialog
       ref="trademark"
-      @update="getHasTrademark"
+      @upload="getHasTrademark"
       :trademarkData="trademarkParams"
       :pageNo="pageNo"
     />

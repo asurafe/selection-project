@@ -41,16 +41,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, defineEmits, nextTick } from "vue";
-import type { UploadProps } from "element-plus";
-import {
-  reqHasTradeMark,
-  reqAddOrUpdateTrademark,
-} from "@/api/product/trademark";
-import type {
-  Records,
-  TradeMark,
-  TradeMarkResponseData,
-} from "@/api/product/trademark/type";
+import { reqAddOrUpdateTrademark } from "@/api/product/trademark";
+import type { TradeMark } from "@/api/product/trademark/type";
 
 const props = defineProps({
   trademarkData: {
@@ -75,6 +67,7 @@ const formRef = ref();
 const emits = defineEmits(["upload"]);
 
 const validatorTmName = (rule: any, value: any, callBack: any) => {
+  console.log(rule)
   if (value.trim().length >= 2) {
     callBack();
   } else {
@@ -83,6 +76,8 @@ const validatorTmName = (rule: any, value: any, callBack: any) => {
 };
 
 const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
+  console.log(rule)
+
   if (value) {
     callBack();
   } else {
@@ -134,7 +129,7 @@ const confirm = async () => {
       type: "success",
       message: trademarkParams.id ? "修改品牌成功" : "添加品牌成功",
     });
-    emits("update", trademarkParams.id ? props.pageNo : 1);
+    emits("upload", trademarkParams.id ? props.pageNo : 1);
   } else {
     ElMessage({
       type: "error",
@@ -143,7 +138,7 @@ const confirm = async () => {
   }
 };
 
-const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
+const beforeAvatarUpload: any = (rawFile:any) => {
   if (
     rawFile.type === "image/png" ||
     rawFile.type === "image/jpeg" ||
@@ -166,9 +161,8 @@ const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
   }
 };
 
-const handleAvatarSuccess: UploadProps["onSuccess"] = (
-  response,
-  uploadFile
+const handleAvatarSuccess: any = (
+  response:any
 ) => {
   trademarkParams.logoUrl = response.data;
   formRef.value.clearValidate("logoUrl");

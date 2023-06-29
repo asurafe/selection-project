@@ -216,6 +216,7 @@ const updateRole = (row: RoleData) => {
 };
 
 const validateRoleName = (rule: any, value: any, callBack: any) => {
+  console.log(rule)
   if (value.trim().length >= 2) {
     callBack();
   } else {
