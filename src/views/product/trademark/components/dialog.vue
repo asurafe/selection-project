@@ -67,7 +67,7 @@ const formRef = ref();
 const emits = defineEmits(["upload"]);
 
 const validatorTmName = (rule: any, value: any, callBack: any) => {
-  console.log(rule)
+  console.log(rule);
   if (value.trim().length >= 2) {
     callBack();
   } else {
@@ -76,7 +76,7 @@ const validatorTmName = (rule: any, value: any, callBack: any) => {
 };
 
 const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
-  console.log(rule)
+  console.log(rule);
 
   if (value) {
     callBack();
@@ -138,7 +138,7 @@ const confirm = async () => {
   }
 };
 
-const beforeAvatarUpload: any = (rawFile:any) => {
+const beforeAvatarUpload: any = (rawFile: any) => {
   if (
     rawFile.type === "image/png" ||
     rawFile.type === "image/jpeg" ||
@@ -161,9 +161,7 @@ const beforeAvatarUpload: any = (rawFile:any) => {
   }
 };
 
-const handleAvatarSuccess: any = (
-  response:any
-) => {
+const handleAvatarSuccess: any = (response: any) => {
   trademarkParams.logoUrl = response.data;
   formRef.value.clearValidate("logoUrl");
 };
